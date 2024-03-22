@@ -31,6 +31,8 @@ Some things I would have liked to have improved if I had more time in order of i
    * The `+` in the `add set` button is not vertically centered
  * Organizing the components directory to establish a standard
 
+ Separately, I would also be a lot more intentional about my commit frequency, size, descriptions, and creating PRs for all changes. But in this case, I was optimizing for speed.
+
 ## Issues
 
 I noticed in the mobile mock the `add set` button does not have a black outline but it does in the desktop mock. I've not included it as I think it looks better without but this would be something I would clarify with a designer or compare against existing examples in the codebase in a typical workday.
