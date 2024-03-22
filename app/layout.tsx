@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ExerciseRoot, Footer, Header } from "./components";
+import { Footer, Header } from "./components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main className="flex flex-col items-center text-black justify-between h-screen bg-gradient-to-r from-bg-gradient-from from-0% to-bg-gradient-to to-150% bg-gradient-to-b">
-          <div className="w-full">
+          <div className="w-full overflow-y-scroll">
             <Header />
-            <ExerciseRoot>
-              {children}
-            </ExerciseRoot>
+            {children}
           </div>
           <Footer />
         </main>

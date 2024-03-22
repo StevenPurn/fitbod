@@ -26,9 +26,6 @@
         "./*"
       ]
     },
-    "types": [
-      "react/next"
-    ],
   },
   "include": [
     "next-env.d.ts",

@@ -10,21 +10,29 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Given the time constraint, I did not invest much time into maintaining an organized file structure and instead defaulted to a simple solution. The location of page components is dictated by the AppRouter API, individual components are in the `app/components` directory, utlity functions are in `app/utils`, constant variables are in `app/constant`, and common types are in `app/types`.
 
-## Learn More
+The `app/layout.tsx` file handles setting the up the site's header and footer and a context provider for external data.
 
-To learn more about Next.js, take a look at the following resources:
+## Improvements
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Some things I would have liked to have improved if I had more time in order of importance:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+ * Setting up and adding tests
+ * Improved UX
+   * Additional accessibility improvements
+   * Leaning more into tailwind's theme capabilites rather than specifying pixels in various components
+   * Surfacing errors when unable to persist data
+   * Loading state indicator
+ * Some minor styling improvements
+   * `Add set` section header is center aligned but should be left aligned with respect to the input section
+   * The `+` in the `add set` button is not vertically centered
+ * Organizing the components directory to establish a standard
 
-## Deploy on Vercel
+## Issues
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+I noticed in the mobile mock the `add set` button does not have a black outline but it does in the desktop mock. I've not included it as I think it looks better without but this would be something I would clarify with a designer or compare against existing examples in the codebase in a typical workday.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Since we're fetching on the server and are therefore hitting the same end point multiple times on page navigation we could potentially run into an issue where the item from the initial fetch is no longer present in subsequent fetches (per the spec). I originally had set this up to run the query once and persist the data in memory locally via context to avoid this issue but that came with cors issues. So the solution is lean into the server side rendering model of Next which is generally preferred anyway. Part of the issue that confused me here was just being unfamiliar with the interaction between Server and Client components. 

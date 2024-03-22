@@ -11,21 +11,20 @@ export const ListItem: FC<ListItemProps> = ({ id, image, name, muscle }) => {
     <Link href={`/exercise/${id}`}>
       <div className="flex w-[329px] justify-between">
         <div className="flex">
-          <div className="pr-[24px] h-[60px] w-[60px]" >
+          <div className="relative mr-[24px] h-[60px] w-[60px]" >
             <Image
+              className="object-cover"
               src={image}
-              alt="TODO"
-              width={60}
-              height={60}
-              sizes="100vw"
-              className="w-100 h-100" />
+              alt={`person performing ${name}`}
+              sizes="60px"
+              fill />
           </div>
           <div className="flex flex-col justify-between">
-            <div>{name}</div>
+            <div className="font-bold">{name}</div>
             <div>{muscle}</div>
           </div>
         </div>
-        <div className="h-full flex justify-center items-center">
+        <div className="flex justify-center items-center">
           <RightArrow />
         </div>
       </div>

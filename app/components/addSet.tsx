@@ -23,9 +23,10 @@ const AddSetInput: FC<AddSetInputProps> = ({ addSet }) => {
   const [reps, setReps] = useState("");
   const [weight, setWeight] = useState("");
   return (
-    <div className="flex flex-row my-[24px] items-center">
+    <div className="flex flex-row my-[24px] items-center text-sm">
       Reps
       <input
+        aria-label="reps per set"
         className="h-[35px] w-[72px] rounded-xl mx-[8px] border-black border-solid border"
         value={reps}
         onChange={(event) => {
@@ -36,6 +37,7 @@ const AddSetInput: FC<AddSetInputProps> = ({ addSet }) => {
         Weight
       </div>
       <input
+        aria-label="weight per rep"
         className="h-[35px] w-[72px] rounded-xl mx-[8px] border-black border-solid border"
         value={weight}
         onChange={(event) => {
@@ -43,6 +45,7 @@ const AddSetInput: FC<AddSetInputProps> = ({ addSet }) => {
         }}
       />
       <button
+        aria-label="add set"
         onClick={() => {
           const parsedReps = parseInt(reps);
           const parsedWeight = parseInt(weight);
@@ -54,7 +57,7 @@ const AddSetInput: FC<AddSetInputProps> = ({ addSet }) => {
           setReps("");
           setWeight("");
         }}
-        className="bg-fitbod-blue text-white h-[35px] w-[42px] rounded-xl mx-[24px]">
+        className="bg-fitbod-blue text-white h-[35px] w-[42px] rounded-xl ml-[24px]">
         +
       </button>
     </div>

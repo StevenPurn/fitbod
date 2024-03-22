@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { calculateRm } from "../utils";
+import { ESTIMATED_1RM } from "../constants";
 
 export type TrackedSetProps = {
   reps: number;
@@ -8,9 +9,12 @@ export type TrackedSetProps = {
 
 export const TrackedSet: FC<TrackedSetProps> = ({ reps, weightInLbs }) => {
   return (
-    <div>
+    <div className="flex flex-row w-full justify-between max-w-[350px]">
       <div>{`${reps} x ${weightInLbs} lb`}</div>
-      <div>{`Estimated 1RM: ${calculateRm(weightInLbs, reps)} lb`}</div>
+      <div>
+        <span className="font-bold">{`${ESTIMATED_1RM}: `}</span>
+        {`${calculateRm(weightInLbs, reps)} lb`}
+      </div>
     </div>
   )
 };

@@ -1,47 +1,21 @@
-"use client"
-import { useExercise } from "@/app/components";
-import { AddSet } from "@/app/components/addSet";
-import { PageTitle } from "@/app/components/pageTitle";
-import { Performances } from "@/app/components/performances";
-import { SetPerformance } from "@/app/types";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { ExerciseDetails } from "@/app/components/exerciseDetails";
+import { EXERCISES_URL } from "@/app/constants";
+import { Exercise } from "@/app/types";
 
-export default function ExercisePage({ params }: { params: { id: string } }) {
-  const exercise = useExercise(params.id);
-  const [performances, setPerformances] = useState<SetPerformance[]>([]);
+async function getData(id: string) {
+  const res = await fetch(EXERCISES_URL);
+  const jsonRes: Exercise[] = await res.json();
+  return jsonRes.find((exercise) => exercise.id === id);
+}
 
-  useEffect(() => {
-    const storedPerformances = JSON.parse(localStorage.getItem(params.id) ?? "[]");
-    if (storedPerformances) {
-      setPerformances(storedPerformances);
-    }
-  }, [params.id]);
 
-  const addSet = (reps: number, weight: number) => {
-    setPerformances(
-      (prevPerformances) => {
-        const newPerformances = [
-          ...prevPerformances,
-          {
-            date: Date.now().toString(),
-            reps,
-            weightInLbs: weight
-          }
-        ];
-        localStorage.setItem(params.id, JSON.stringify(newPerformances));
-        return newPerformances;
-      });
-  };
+export type ExercisePageProps = {
+  params: { id: string };
+}
 
+export default async function ExercisePage({ params }: ExercisePageProps) {
+  const exercise = await getData(params.id);
   return exercise ? (
-    <div className="flex flex-col items-center">
-      <PageTitle title={exercise.name} />
-      <div className="rounded-[8px] overflow-hidden relative w-[150px] h-[150px] mb-[32px]">
-        <Image src={exercise.image} alt="TODO" fill objectFit="cover" />
-      </div>
-      <AddSet addSet={addSet} />
-      <Performances performances={performances} />
-    </div>
+    <ExerciseDetails exercise={exercise} />
   ) : <div>Not Found</div>
 }
